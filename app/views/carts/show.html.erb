@@ -3,8 +3,13 @@
   <header class="page-header">
     <h1>My Cart</h1>
   </header>
-
+  <% if enhanced_cart.empty? %>
+  <div class="alert alert-info">
+    Your cart is empty. <a href="/" class="alert-link">Go to the home page</a>
+  </div>
+  <%else %>
   <div class="panel panel-default items">
+  
     <table class="table table-bordered">
       <thead>
         <tr>
@@ -34,6 +39,7 @@
 
   <div class="row">
     <div class="col-xs-12">
+    
       <%= form_tag orders_path do %>
         <script
           src="https://checkout.stripe.com/checkout.js" class="stripe-button"
@@ -48,5 +54,5 @@
       <% end %>
     </div>
   </div>
-
+<% end %>
 </section>
