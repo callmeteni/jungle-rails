@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  devise_for :users
+  get 'sessions/new'
+  get 'sessions/create'
+  get 'sessions/destroy'
+  get 'users/new'
+  get 'users/create'
   root to: 'products#index'
 
   resources :products, only: [:index, :show]
@@ -24,6 +30,17 @@ Rails.application.routes.draw do
   end
 
     get '/about', to: 'about#index'
+
+    resources :users, only: [:new, :create]
+
+    # Session routes (login and logout)
+    get '/login', to: 'sessions#new'
+    post '/login', to: 'sessions#create'
+    delete '/logout', to: 'sessions#destroy'
+
+    get '/register', to: 'users#new'
+    post '/register', to: 'users#create'
+
 
 
 

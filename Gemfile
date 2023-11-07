@@ -40,6 +40,9 @@ gem 'stripe'
 # ImageMagick ( Make sure librairies installed )
 gem 'rmagick'
 
+# devise fir user authentication
+gem 'devise'
+
 # Fake Data with Faker & Carrierwave
 gem 'faker'
 gem 'carrierwave'

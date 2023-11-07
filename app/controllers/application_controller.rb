@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  
+  before_action :set_current_user 
   protect_from_forgery with: :exception
 
   private
@@ -28,5 +28,13 @@ class ApplicationController < ActionController::Base
       expires: 10.days.from_now
     }
     cookies[:cart]
+  end
+
+  def set_current_user
+    if user_signed_in?  # You would implement this method based on your authentication system
+      @current_user = current_user
+    else
+      @current_user = nil
+    end
   end
 end
