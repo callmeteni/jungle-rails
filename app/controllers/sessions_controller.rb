@@ -17,5 +17,18 @@ class SessionsController < ApplicationController
       session[:user_id] = nil
       redirect_to root_path, notice: 'Logged out successfully!'
     end
+
+    def self.authenticate_with_credentials(email, password)
+      normalized_email = email.strip.downcase
+  
+      user = find_by(email: normalized_email)
+  
+      if user && user.authenticate(password)
+        user
+      else
+        nil
+      end
+    end
+
   end
   
