@@ -1,15 +1,10 @@
 Rails.application.routes.draw do
 
-  devise_for :users
-  get 'sessions/new'
-  get 'sessions/create'
-  get 'sessions/destroy'
-  get 'users/new'
-  get 'users/create'
   root to: 'products#index'
 
   resources :products, only: [:index, :show]
   resources :categories, only: [:show]
+  resource  :session, only: [:new, :create, :destroy]
 
   resource :cart, only: [:show] do
     post   :add_item
@@ -30,18 +25,12 @@ Rails.application.routes.draw do
   end
 
     get '/about', to: 'about#index'
+    get '/register', to: 'registrations#new', as: 'register'
+    post '/register', to: 'registrations#create'
 
-    resources :users, only: [:new, :create]
-
-    # Session routes (login and logout)
-    get '/login', to: 'sessions#new'
+    get '/login', to: 'sessions#new', as: 'login'
     post '/login', to: 'sessions#create'
-    delete '/logout', to: 'sessions#destroy'
-
-    get '/register', to: 'users#new'
-    post '/register', to: 'users#create'
-
-
+    delete '/logout', to: 'sessions#destroy', as: 'logout'
 
 
 
